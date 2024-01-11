@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DeleteButtonStyle">
+        <item name="backgroundTint">@color/red</item>
+    </style>
+
+    <style name="EditButtonStyle">
+        <item name="backgroundTint">@color/yellow</item>
+    </style>
+</resources>
