@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Notebook"
+rootProject.name = "Phonebook"
 
 include ':ui-mdc'
 include ':ui-compose'
