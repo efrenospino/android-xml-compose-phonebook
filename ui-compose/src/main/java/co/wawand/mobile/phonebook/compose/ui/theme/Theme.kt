@@ -13,16 +13,17 @@ import androidx.core.view.ViewCompat
 
 private val DarkColorScheme = darkColorScheme()
 
-private val LightColorScheme = lightColorScheme(
-    primary = purple_500,
-    primaryContainer = purple_700,
-    onPrimary = white,
+@Composable
+fun phonebookLightColorScheme(colors: PhonebookColors = phonebookColors()) = lightColorScheme(
+    primary = colors.purple_500,
+    primaryContainer = colors.purple_700,
+    onPrimary = colors.white,
 
-    secondary = teal_200,
-    secondaryContainer = teal_700,
-    onSecondary = black,
+    secondary = colors.teal_200,
+    secondaryContainer = colors.teal_700,
+    onSecondary = colors.black,
 
-    onTertiary = gray_700
+    onTertiary = colors.gray_700
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -37,12 +38,11 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun PhonebookTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
         darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        else -> phonebookLightColorScheme()
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
