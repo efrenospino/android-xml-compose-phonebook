@@ -5,16 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import co.wawand.mobile.phonebook.data.ext.flatWithId
+import co.wawand.mobile.phonebook.data.ext.flat
 import co.wawand.mobile.phonebook.data.model.ContactsGroup
 import co.wawand.mobile.phonebook.mdc.databinding.ItemContactBinding
 import co.wawand.mobile.phonebook.mdc.databinding.ItemContactSectionBinding
-import java.util.UUID
 
 class ContactListRecyclerViewAdapter :
     RecyclerView.Adapter<ContactListRecyclerViewAdapter.ItemViewHolder>() {
 
     private var flatContactList: MutableList<Item> = mutableListOf()
+
+    init {
+        setHasStableIds(true)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return if (viewType == ViewType.CONTACT.ordinal) {
@@ -60,18 +63,17 @@ class ContactListRecyclerViewAdapter :
 
     fun refreshContactList(contactList: List<ContactsGroup>) {
 
-        val newFlatContactList = contactList.flatWithId(
-            transformSection = { id, sectionName -> Item.Section(id, sectionName) },
-            transformContact = { id, contact -> Item.Contact(id, contact) },
+        val newFlatContactList = contactList.flat(
+            transformSection = { sectionName -> Item.Section(sectionName) },
+            transformContact = { contact -> Item.Contact(contact) },
         )
 
         val diffCallback = DiffCallback(flatContactList, newFlatContactList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 
-        flatContactList.clear()
-        flatContactList.addAll(newFlatContactList)
-
+        flatContactList = newFlatContactList.toMutableList()
         diffResult.dispatchUpdatesTo(this)
+
     }
 
     internal class DiffCallback(private val oldList: List<Item>, private val newList: List<Item>) :
@@ -103,15 +105,14 @@ class ContactListRecyclerViewAdapter :
             ItemViewHolder(binding.root)
     }
 
-    sealed class Item(uuid: UUID) {
+    sealed class Item(id: String) {
 
-        val id: Long = uuid.mostSignificantBits and Long.MAX_VALUE
+        val id: Long = id.hashCode().toLong()
 
-        data class Section(val uuid: UUID, val title: String) : Item(uuid)
+        data class Section(val title: String) : Item(title)
         data class Contact(
-            val uuid: UUID,
             val contact: co.wawand.mobile.phonebook.data.model.Contact
-        ) : Item(uuid)
+        ) : Item(contact.id.toString())
     }
 
 }
