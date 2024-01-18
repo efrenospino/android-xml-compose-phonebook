@@ -9,35 +9,16 @@ source for practical demonstration purposes.
 In this project, I've built two small Android applications that leverage distinct approaches to UI
 development:
 
-1. **Jetpack Compose App**: Utilizes the modern Jetpack Compose framework for building the user interface.
+1. **Jetpack Compose App**: Utilizes the modern Jetpack Compose framework for building the user
+   interface.
 
 2. **Traditional XML App**: Employs the traditional XML-based approach for UI development.
-
-Both apps share resources, including drawables and strings, as well as data components such as
-models and repositories. A fake data source is incorporated to simulate real-world scenarios without
-relying on an actual backend.
-
-## Architectures and Reused Components
-
-### Jetpack Compose
-
-Jetpack Compose is a modern UI toolkit for building native Android UIs. In the Jetpack Compose
-version of the app, the UI is constructed declaratively using Kotlin programming language. Key
-components such as layouts, widgets, and navigation are seamlessly integrated to provide a cohesive
-user experience.
-
-### Traditional XML
-
-The Traditional XML approach sticks to the conventional method of building UIs in Android using XML
-files. Layouts are defined using XML markup, and views are inflated at runtime. This approach,
-although older, remains a robust choice for Android development.
-
-### Shared Resources and Data
 
 Both applications share common resources and data components, fostering code reusability and
 consistency. This includes shared drawables, strings, models, and repositories. This approach
 ensures that both apps, despite using different UI frameworks, maintain a uniform appearance and
-functionality.
+functionality. A fake data source is incorporated to simulate real-world scenarios without
+relying on an actual backend.
 
 ## Getting Started
 
@@ -50,7 +31,7 @@ To run either of the applications, follow these general steps:
 ## Screenshots
 
 |            Traditional XML             |              Jetpack Compose               |
-| :------------------------------------: | :----------------------------------------: |
+|:--------------------------------------:|:------------------------------------------:|
 | ![Traditional XML App](images/mdc.gif) | ![Jetpack Compose App](images/compose.gif) |
 
 ## Architecture
@@ -75,7 +56,8 @@ The app adopts a modular design, dividing into UI, Data, and Shared modules.
 
 - **Repository Pattern:** Abstract data sources for seamless access.
 - **Coroutines:** Utilize Kotlin coroutines for efficient asynchronous operations.
-- **Modularization:** Organize data sources into distinct modules (e.g., LocalDataSource, RemoteDataSource).
+- **Modularization:** Organize data sources into distinct modules (e.g., LocalDataSource,
+  RemoteDataSource).
 
 ## Contributions
 
@@ -85,4 +67,5 @@ Patches are encouraged and may be submitted by forking this project and submitti
 
 ## License
 
-This project is licensed under the Apache License Version 2.0 - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License Version 2.0 - see the [LICENSE](LICENSE) file for
+details.
