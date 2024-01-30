@@ -16,7 +16,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Phonebook"
 
-include ':ui-mdc'
+include ':ui-view-based'
 include ':ui-compose'
 include ':data'
 include ':ui-common'
